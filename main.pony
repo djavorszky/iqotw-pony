@@ -8,5 +8,6 @@ actor Main
 
 
 
-interface Solver
+interface Question
+  fun description(): String
   be solve(out: OutStream)
