@@ -16,10 +16,7 @@ class iso _Mar21SolverTestToMinutes is UnitTest
   fun name(): String => "to_minutes"
 
   fun apply(h: TestHelper) ? =>
-    let input: String val = "05:30"
-    let s = Mar21Solver
-
-    h.assert_eq[USize](s.to_minutes(input)?, 330)
+    h.assert_eq[USize](Mar21Solver.to_minutes("05:30")?, 330)
 
 
 class iso _Mar21SolverTestSolution is UnitTest
@@ -29,8 +26,4 @@ class iso _Mar21SolverTestSolution is UnitTest
     let input: Array[String val] val =
       ["01:00";  "14:10"; "20:05"; "08:15"; "11:30"; "13:45"]
 
-    let solver = Mar21Solver
-
-    let solution = solver.smallest_interval(input)?
-
-    h.assert_eq[USize](solution, 25)
+    h.assert_eq[USize](Mar21Solver.smallest_interval(input)?, 25)
