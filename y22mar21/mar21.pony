@@ -1,35 +1,26 @@
 use "collections"
 
-use ".."
-
-actor Mar21 is Question
+actor Main
   let _test_input: Array[String val] val = 
     ["01:00";  "14:10"; "20:05"; "08:15"; "11:30"; "13:45"]
-
-  fun description(): String =>
-    "Given a list of times in a 24-hour period, return the smallest interval between two times in the list."
-
-  be solve(out: OutStream) =>
-    let solver = Mar21Solver
-
-    out.print("March 21:")
+  
+  new create(env: Env) =>
+    env.out.print("March 21, 2021:")
     try
-      let solution = solver.smallest_interval(_test_input)?
-      out.print(description())
-      out.print("['01:00', '08:15', '11:30', '13:45', '14:10', '20:05'] => " + solution.string() + " minutes")
+      let solution = Mar21Solver.smallest_interval(_test_input)?
+      env.out.print("Given a list of times in a 24-hour period, return the smallest interval between two times in the list.")
+      env.out.print("['01:00'; '14:10'; '20:05'; '08:15'; '11:30'; '13:45'] => " + solution.string() + " minutes")
     else
-      out.print("Something went wrong")
+      env.out.print("Something went wrong")
     end
-
 
 class Mar21Solver
 
-  fun smallest_interval(input: Array[String val] val): USize ? =>
+  fun smallest_interval(input: Array[String] val): USize ? =>
     let minutes = Array[Bool].init(false, 1440)
 
     // For each of the time, calculate how many minutes it's after midnight
     // and set a bool flag to true at that location
-
 
     for time in input.values() do
       let idx = to_minutes(time)?
