@@ -25,6 +25,31 @@ class Mar21Solver
 
     (h * 60) + m
 
+  fun smallest_interval_with_sorting(input: Array[String] val): USize ? =>
+    """
+    Efficient approach; Sort the input array, then check each pairs to calculate the interval
+    between them.
+
+    This is O(n*log(n))
+    """
+
+    let minutes: Array[ISize] = Iter[String](input.values())
+      .map[ISize]({(x): ISize ? => Mar21Solver.to_minutes(x)?.isize()})
+      .collect(Array[ISize](input.size()))
+
+    let sorted_minutes = Sort[Array[ISize], ISize](minutes)
+
+    var min_interval: USize = 1440
+
+    for i in Range(0, sorted_minutes.size() - 1) do
+      let interval = (sorted_minutes(i)? - sorted_minutes(i + 1)?).abs()
+
+      min_interval = min_interval.min(interval)
+    end
+
+    min_interval
+
+
   fun smallest_interval_brute_force(input: Array[String] val): USize =>
     """
     This is the dumb approach - for each of the input elements, map it to minutes

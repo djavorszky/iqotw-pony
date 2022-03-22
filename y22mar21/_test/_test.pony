@@ -9,6 +9,7 @@ actor Main is TestList
 
   fun tag tests(test: PonyTest) =>
     test(_Mar21ToMinutesTest)
+    test(_Mar21EfficientTest)
     test(_Mar21AlternativeTest)
     test(_Mar21BruteForceTest)
     test(_Mar21SmarterBruteForceTest)
@@ -19,6 +20,16 @@ class iso _Mar21ToMinutesTest is UnitTest
 
   fun apply(h: TestHelper) ? =>
     h.assert_eq[USize](Mar21Solver.to_minutes("05:30")?, 330)
+
+
+class iso _Mar21EfficientTest is UnitTest
+  fun name(): String => "efficient solution"
+
+  fun apply(h: TestHelper) ? =>
+    let input: Array[String val] val =
+      ["01:00";  "14:10"; "20:05"; "08:15"; "11:30"; "13:45"]
+
+    h.assert_eq[USize](Mar21Solver.smallest_interval_with_sorting(input)?, 25)
 
 
 class iso _Mar21AlternativeTest is UnitTest
