@@ -81,6 +81,21 @@ fun smallest_interval_smarter_brute_force(input: Array[String] val): USize ? =>
     min_interval
 
   fun smallest_interval_alternative(input: Array[String] val): USize ? =>
+    """
+    This is an algorithm that computes the solution in O(n) time with ~ 1.4k extra space.
+
+    Generally speaking, it is slower for most cases for this specific example, its existence
+    is thanks to being challenged to solve it in O(n) time.
+
+    The algorithm is as follows:
+    1. Create an array with 1440 `false` values
+    2. Map each input HH:MM to minutes-since-midnight // This is proportional to input size
+    3. For each of the minutes-since-midnight values, flip the bool to `true` at that given index // This is proportional to input size
+    4. Iterate through the array and check the "distance" between two subsequent "true" values // This is at most 1440
+
+    The smallest distance is the smallest interval.
+    """
+
     let minutes = Array[Bool].init(false, 1440)
 
     // For each of the time, calculate how many minutes it's after midnight
