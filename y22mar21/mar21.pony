@@ -17,7 +17,7 @@ actor Main
       env.out.print("Something went wrong")
     end
 
-class Mar21Solver
+primitive Mar21Solver
 
   fun to_minutes(time: String): USize ? =>
     let h = time.trim(0, 2).usize()?
@@ -27,8 +27,7 @@ class Mar21Solver
 
   fun smallest_interval_with_sorting(input: Array[String] val): USize ? =>
     """
-    Efficient approach; Sort the input array, then check each pairs to calculate the interval
-    between them.
+    Efficient approach; Sort the input array, then calculate the interval between consecutive times
 
     This is O(n*log(n))
     """
